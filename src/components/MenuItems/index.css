@@ -1,0 +1,134 @@
+.green-span {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  color: green;
+  background-color: green;
+  margin: 5px;
+}
+
+.green-color {
+  height: 30px;
+  width: 30px;
+  border: 1px solid lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.red-span {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  color: red;
+  background-color: red;
+  margin: 5px;
+}
+
+.red-color {
+  height: 30px;
+  width: 30px;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.add-item {
+  background-color: green;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 55px;
+  width: 90px;
+  border-radius: 35px;
+}
+
+.sign {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 14px;
+}
+
+.sign-button {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.availability {
+  color: red;
+  font-size: 14px;
+  font-family: 'Roboto';
+}
+
+.heading {
+  font-family: 'Roboto';
+  font-size: 22px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.description {
+  font-family: 'Roboto';
+  color: lightgray;
+}
+
+.calories {
+  color: yellow;
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.customization {
+  color: blue;
+  font-family: 'Roboto';
+  font-size: 14px;
+}
+
+.image {
+  height: 150px;
+  width: 150px;
+  margin-left: 50px;
+}
+
+.menu-list-item {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid lightgray;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.dish-type {
+  display: flex;
+}
+
+.calories-container {
+  display: flex;
+  align-items: center;
+}
+
+.logout-button {
+  background-color: blue;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  padding: 10px 25px;
+  margin-right: 15px;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

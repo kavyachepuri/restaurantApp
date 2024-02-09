@@ -1,0 +1,27 @@
+.active-category-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: 'Roboto';
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: maroon;
+  border-bottom: 1px solid maroon;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.category-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: 'Roboto';
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
