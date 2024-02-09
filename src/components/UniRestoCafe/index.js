@@ -1,85 +1,125 @@
 import {Component} from 'react'
-import {BsCart3} from 'react-icons/bs'
+
 import MenuFilterList from '../MenuFilterList'
-import ListItem from '../ListItem'
+import RepositoryItem from '../RepositoryItem'
 
 const MenuFiltersData = [
-  {menu_category: 'Salads and Soup', menu_category_id: '11'},
-  {menu_category: 'From The Barnyard', menu_category_id: '12'},
-  {menu_category: 'From the Hen House', menu_category_id: '13'},
-  {menu_category: 'Fresh From The Sea', menu_category_id: '14'},
-  {menu_category: 'Biryani', menu_category_id: '15'},
-  {menu_category: 'Fast Food', menu_category_id: '17'},
+  {id: 'SALADS AND SOUPS', menu: 'Salads and Soups'},
+  {id: 'FROM THE BARNYARD', menu: 'From The Barnyard'},
+  {id: 'FROM THE HEN HOUSE', menu: 'From The Hen House'},
+  {id: 'FRESH FROM THE SEA', menu: 'Fresh From The Sea'},
+  {id: 'BIRYANI', menu: 'Biryani'},
+  {id: 'FAST FOOD', menu: 'Fast Food'},
 ]
 
 class UniRestoCafe extends Component {
   state = {
-    activeFilterId: MenuFiltersData[0].menu_category_id,
-    menuListItems: [],
+    activeMenuFilterId: MenuFiltersData[0].id,
+    repositoryList: [],
+    count: 0,
   }
 
   componentDidMount() {
-    this.getMenuItems()
+    this.getRepositories()
   }
 
-  getMenuItems = async () => {
-    const {activeFilterId} = this.state
-    
-    const url = `https://run.mocky.io/v3/77a7e71b-804a-4fbd-822c-3e365d3482cc?menu_category_id=${activeFilterId}`
+  getRepositories = async () => {
+    const {activeMenuFilterId} = this.state
+    const url = 'https://run.mocky.io/v3/77a7e71b-804a-4fbd-822c-3e365d3482cc'
     const response = await fetch(url)
-    if (response.ok) {
-      const fetchedData = await response.json()
-      const updatedData = fetchedData.category_dishes.map(eachItem => ({
-        id: eachItem.dish_id,
-        name: eachItem.dish_name,
-        price: eachItem.dish_price,
-        imageUrl: eachItem.dish_image,
-        currency: eachItem.dish_currency,
-        calories: eachItem.dish_calories,
-        description: eachItem.dish_description,
-      }))
-      this.setState({menuListItems: updatedData})
-    }
+    const data = await response.json()
+    console.log(data)
+    // log the data to understand better
+
+    const array = data.map(each => ({
+      tableMenuList: each.table_menu_list,
+      restaurantName: each.restaurant_name,
+    }))
+
+    const totalDetails = array[0]
+    // eslint-disable-next-line
+    const {tableMenuList, restaurantName} = totalDetails
+
+    const format = tableMenuList.map(each => ({
+      categoryDishes: each.category_dishes.map(each1 => ({
+        dishId: each1.dish_id,
+        dishName: each1.dish_name,
+        dishAvailability: each1.dish_Availability,
+        dishCurrency: each1.dish_currency,
+        dishType: each1.dish_Type,
+        dishCalories: each1.dish_calories,
+        dishImage: each1.dish_image,
+        dishPrice: each1.dish_price,
+        dishDescription: each1.dish_description,
+        nextUrl: each1.nexturl,
+        addonCat: each1.addonCat,
+      })),
+      menuCategory: each.menu_category,
+      menuCategoryId: each.menu_category_id,
+      menuCategoryImage: each.menu_category_image,
+      nextUrl: each.nexturl,
+    }))
+
+    console.log('format:-->', format)
+    // this.setState({total: format})
+    const single = format[0]
+    const {categoryDishes} = single
+    this.setState({repositoryList: categoryDishes})
+    // Now, accordingly you can update the state.
   }
 
-  updateMenuCategoryId = id => {
-    this.setState({activeFilterId: id}, this.getMenuItems)
+  updateFilterList = activeMenuFilterId => {
+    this.setState({activeMenuFilterId}, this.getRepositories)
   }
 
   renderMenuFilterList = () => (
     <ul>
-      {MenuFiltersData.map(eachMenu => (
+      {MenuFiltersData.map(eachItem => (
         <MenuFilterList
-          key={eachMenu.id}
-          details={eachMenu}
-          updateMenuCategoryId={this.updateMenuCategoryId}
+          key={eachItem.id}
+          details={eachItem}
+          updateFilterList={this.updateFilterList}
         />
       ))}
     </ul>
   )
 
-  renderListItem = () => {
-    const {menuListItems} = this.state
+  updatePositive = () => {
+    this.setState(prevState => ({count: prevState.count + 1}))
+  }
+
+  updateNegative = () => {
+    this.setState(prevState => ({count: prevState.count + 1}))
+  }
+
+  renderRepositoryItem = () => {
+    const {repositoryList} = this.state
     return (
       <ul>
-        {menuListItems.map(eachItem => (
-          <ListItem details={eachItem} key={eachItem.id} />
+        {repositoryList.map(eachItem => (
+          <RepositoryItem
+            key={eachItem.id}
+            details={eachItem}
+            updatePositive={this.updatePositive}
+            updateNegative={this.updateNegative}
+          />
         ))}
       </ul>
     )
   }
 
   render() {
-    return(
-    <div>
+    const {count} = this.state
+    return (
       <div>
-        <h1>UNI Resto Cafe</h1>
-        <h1>My Orders</h1>
-        <BsCart3 />
-      </div>
+        <h1>Uni Resto Cafe</h1>
+        <p>My Orders</p>
+        <p>{count}</p>
         {this.renderMenuFilterList()}
-        {this.renderListItem()}
-    </div>
+        {this.renderRepositoryItem()}
+      </div>
     )
   }
+}
+
 export default UniRestoCafe

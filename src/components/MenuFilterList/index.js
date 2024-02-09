@@ -1,16 +1,15 @@
 const MenuFilterList = props => {
-  const {details} = props
-  const {category, updateMenuCategoryId} = details
-  const onClickMenuCategory = id => {
-    updateMenuCategoryId(id)
+  const {details, updateFilterList} = props
+  const {id, menu} = details
+  const onClickFilterItem = () => {
+    updateFilterList(id)
   }
   return (
     <li>
-      <button type="button" onClick={onClickMenuCategory}>
-        {category}
+      <button type="button" onClick={onClickFilterItem}>
+        {menu}
       </button>
     </li>
   )
 }
-
 export default MenuFilterList
