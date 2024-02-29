@@ -685,6 +685,7 @@ class RestaurantPage extends Component {
     const response = await fetch(url)
     if (response.ok) {
       const data = await response.json()
+      // eslint-disable-next-line
       const menuList = data[0].table_menu_list.map(eachItem => ({
         id: eachItem.menu_category,
         value: eachItem.menu_category,
